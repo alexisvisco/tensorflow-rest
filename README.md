@@ -34,7 +34,7 @@ You should have something like that :
 
 If you have already some dataset to another folder you can edit variable in the training.sh :
 
-```
+```sh
 WORKING_DIR="tf_files"
 
 BOTTLENECK_DIR="$WORKING_DIR/bottlenecks"
@@ -48,7 +48,7 @@ DATA_FOLDER="$WORKING_DIR/data"
 
 And in the classify.py
 
-```
+```python
 ...
 WORKING_DIRECTORY="tf_files"
 TRAINED_LABELS="%s/retrained_labels.txt" % (WORKING_DIRECTORY)
@@ -67,7 +67,7 @@ At the moment you can only check images on the hard drive of your machine which 
 
 To check an image just run :
 
-```
+```curl
 curl -POST -H "Content-type: application/json" -d 
 '{
   "data": ["/home/test/tmp/image0.jpg"]
