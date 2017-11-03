@@ -7,7 +7,7 @@ OUTPUT_GRAPH="$WORKING_DIR/retrained_graph.pb"
 OUTPUT_LABELS="$WORKING_DIR/retrained_labels.txt"
 DATA_FOLDER="$WORKING_DIR/data"
 
-python retrain.py \
+python train.py \
 --bottleneck_dir=$BOTTLENECK_DIR \
 --how_many_training_steps $STEPS \
 --model_dir=$MODEL_DIR \
