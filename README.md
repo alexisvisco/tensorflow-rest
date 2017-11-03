@@ -1,5 +1,5 @@
-# tensorflow-image-rest
-Tensorflow image classifier with rest api !
+# Tensorflow-REST
+Tensorflow image classifier with a rest api ! (customisable)
 
 ## Description
 
