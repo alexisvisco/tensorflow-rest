@@ -24,12 +24,23 @@ Yes you can not do just one dataset.
 You should have something like that :
 
 ```
-|-- tf_files
-|   `-- data <-- Here create folder per dataset.
-|-- classify.py
-|-- requierments.txt
-|-- train_data.sh
-`-- train.py
+├── classify.py
+├── requierments.txt
+├── retrain.py
+├── tf_files
+│   ├── data
+│   │   ├── boats
+│   │   │   ├── 00.jpeg
+│   │   │   ├── 01.jpeg
+│   │   │   ├── 02.jpeg
+│   │   │   ├── 03.jpeg
+│   │   │   ...
+│   │   └── wood
+│   │       ├── 00.jpeg
+│   │       ├── 01.jpeg
+│   │       ├── 02.jpeg
+│   │       ...
+└── train_data.sh
 ```
 
 If you have already some dataset to another folder you can edit variable in the training.sh :
