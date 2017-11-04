@@ -1,10 +1,6 @@
 from bottle import request, response, route, run
 import tensorflow as tf
-import sys
-import os
-import errno
-import urllib
-import uuid
+import sys, os, errno, urllib, uuid
 
 WORKING_DIRECTORY = "tf_files"
 TMP_DIRECTORY = "tmp"
@@ -17,12 +13,11 @@ def hello():
     print(request.json['data'])
     for info in request.json['data']:
         if (info['type'] == 'local'):
-            print('hello')
             json[info['path']] = score(info['path'])
         else:
             path = download_image(info['path'], info['ext'])
             json[info['path']] = score(path)
-            #os.remove(path)
+            os.remove(path)
     return json
 
 
@@ -33,7 +28,6 @@ def status():
 
 def download_image(url, extension):
     filename = TMP_DIRECTORY + '/' + uuid.uuid4().hex + extension
-    print(filename)
     urllib.urlretrieve(url, filename)
     return filename
 
