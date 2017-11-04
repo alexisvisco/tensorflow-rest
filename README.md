@@ -69,6 +69,15 @@ RETRAINED_GRAPH="%s/retrained_graph.pb" % (WORKING_DIRECTORY)
 
 Then all is done just run `sh train.sh`
 
+You will see something like that : 
+![](https://image.prntscr.com/image/za9C8v1cRIChS8UdzyOnug.png)
+And the end output is something like this :
+```
+INFO:tensorflow:Final test accuracy = 100.0% (N=21)
+INFO:tensorflow:Froze 2 variables.
+Converted 2 variables to const ops.
+```
+
 ## Classify an image
 
 To classify an image you need to run `python classify.py` in background (with systemctl for instance or screen).
