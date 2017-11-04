@@ -62,6 +62,7 @@ And in the classify.py
 ```python
 ...
 WORKING_DIRECTORY="tf_files"
+TMP_DIRECTORY = "tmp"
 TRAINED_LABELS="%s/retrained_labels.txt" % (WORKING_DIRECTORY)
 RETRAINED_GRAPH="%s/retrained_graph.pb" % (WORKING_DIRECTORY)
 ...
@@ -83,14 +84,30 @@ Converted 2 variables to const ops.
 To classify an image you need to run `python classify.py` in background (with systemctl for instance or screen).
 Then to check if you have access to the api just do `curl http://localhost:8989/status/`.
 
-At the moment you can only check images on the hard drive of your machine which means that you have to send the path of the image.
-
-To check an image just run :
+To check a local image just run :
 
 ```curl
 curl -POST -H "Content-type: application/json" -d 
 '{
-  "data": ["/home/test/tmp/image0.jpg"]
+  "data": [{
+    "ext" : "jpg",
+    "path" : "/home/images/local01.jpg",
+    "type" : "local"
+  }]
+}'
+'localhost:8989/classify_image/'
+```
+
+To check a http image just run :
+
+```curl
+curl -POST -H "Content-type: application/json" -d 
+'{
+  "data": [{
+    "ext" : "jpg",
+    "path" : "http://somedomains.come/somwhere/image.jpg",
+    "type" : "url"
+  }]
 }'
 'localhost:8989/classify_image/'
 ```
