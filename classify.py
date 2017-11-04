@@ -1,20 +1,28 @@
 from bottle import request, response, route, run
 import tensorflow as tf
-import sys, os, errno
+import sys
+import os
+import errno
+import urllib
+import uuid
 
-WORKING_DIRECTORY="tf_files"
-TRAINED_LABELS="%s/retrained_labels.txt" % (WORKING_DIRECTORY)
-RETRAINED_GRAPH="%s/retrained_graph.pb" % (WORKING_DIRECTORY)
+WORKING_DIRECTORY = "tf_files"
+TMP_DIRECTORY = "tmp"
+TRAINED_LABELS = "%s/retrained_labels.txt" % (WORKING_DIRECTORY)
+RETRAINED_GRAPH = "%s/retrained_graph.pb" % (WORKING_DIRECTORY)
 
 @route('/classify_image/', method='POST')
 def hello():
     json = {}
     print(request.json['data'])
-    for path in request.json['data']:
-        sc = score(path)
-        print(sc)
-        json[path] = sc
-
+    for info in request.json['data']:
+        if (info['type'] == 'local'):
+            print('hello')
+            json[info['path']] = score(info['path'])
+        else:
+            path = download_image(info['path'], info['ext'])
+            json[info['path']] = score(path)
+            #os.remove(path)
     return json
 
 
@@ -22,6 +30,12 @@ def hello():
 def status():
     return 'online'
 
+
+def download_image(url, extension):
+    filename = TMP_DIRECTORY + '/' + uuid.uuid4().hex + extension
+    print(filename)
+    urllib.urlretrieve(url, filename)
+    return filename
 
 def create_tmp(path):
     try:
